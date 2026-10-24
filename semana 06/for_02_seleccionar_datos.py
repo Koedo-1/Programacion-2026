@@ -5,12 +5,14 @@ universitario de UMCA. Se desea identificar los registros de 3 horas o más.
 
 Prediga cuántos registros cumplen la condición antes de completar el ciclo.
 """
-
+#                   0  1  2  3  4
 horas_reportadas = [2, 4, 3, 1, 5]
 horas_meta = []
 
 for horas in horas_reportadas:
     if horas >= 3:
+        horas_meta.append(horas)
+        
         # TODO: agregue a horas_meta el dato que cumple la condición.
         pass
 
