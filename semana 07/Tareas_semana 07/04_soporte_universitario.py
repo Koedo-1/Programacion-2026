@@ -9,14 +9,40 @@ from incidencias import incidencias
 #       "Acceso", "Equipo" y "Red", un contador de casos pendientes,
 #       un set de provincias con pendientes, una lista de tuplas de casos
 #       urgentes y una tupla para el caso con más minutos de atención.
+
+
+acumulador_minutos = 0 
+contador_casos_pend = 0 
+categorias = {"Acceso": 0 , "Equipo": 0 , "Red": 0 }
+provincias_pend = set()
+casos_urgentes = []
+caso_m_ate = ()
+
+
 # TODO: Recorra incidencias una sola vez. Actualice los acumuladores y el
 #       conteo de la categoría de cada registro.
+for incidencia in incidencias
+acumulador_minutos += incidencia["minutos"]
+categoria = incidencia["Categoria"]
+categorias[categoria] += 1 
+
+
 # TODO: Si un caso NO está resuelto, cuéntelo y agregue su provincia al set.
 #       Si, además, tiene 60 minutos o más, agregue (id, minutos) a la lista
 #       de casos urgentes. Actualice la tupla del caso más largo si corresponde.
+
+
+
+
 # TODO: Muestre total y promedio de minutos, conteo por categoría, cantidad
 #       de pendientes, provincias con pendientes, casos urgentes y caso más
 #       largo. Compruebe también si "San Jose" pertenece al set.
+
+
+
+
+
+
 # Control: 10 casos; 500 minutos; promedio 50; Acceso 4, Equipo 3, Red 3;
 # 4 pendientes en 4 provincias; urgentes INC-02, INC-05 e INC-07;
 # más largo INC-07 con 95 minutos; hay pendientes en San Jose.
