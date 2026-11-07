@@ -12,8 +12,8 @@ from incidencias import incidencias
 
 
 acumulador_minutos = 0 
-contador_casos_pend = 0 
 categorias = {"Acceso": 0 , "Equipo": 0 , "Red": 0 }
+contador_casos_pend = 0 
 provincias_pend = set()
 casos_urgentes = []
 caso_m_ate = ()
@@ -21,10 +21,21 @@ caso_m_ate = ()
 
 # TODO: Recorra incidencias una sola vez. Actualice los acumuladores y el
 #       conteo de la categoría de cada registro.
-for incidencia in incidencias
-acumulador_minutos += incidencia["minutos"]
-categoria = incidencia["Categoria"]
-categorias[categoria] += 1 
+max_minutos = -1 
+for incidencia in incidencias:
+    acumulador_minutos += incidencia["minutos_atencion"]
+    categoria = incidencia["categoria"]
+    categorias[categoria] += 1
+    
+    if incidencia["minutos_atencion"] > max_minutos:
+        max_minutos = incidencia["minutos_atencion"]
+        caso_m_ate = (incidencia["id"], incidencia["provincia"], incidencia["minutos_atencion"])
+    if not incidencia["resuelto"]:
+        contador_casos_pend += 1
+        provincias_pend.add(incidencia["provincia"])
+        
+        if incidencia["minutos_atencion"] > 60:  
+            casos_urgentes.append((incidencia["id"], incidencia["minutos_atencion"]))
 
 
 # TODO: Si un caso NO está resuelto, cuéntelo y agregue su provincia al set.
@@ -38,7 +49,16 @@ categorias[categoria] += 1
 #       de pendientes, provincias con pendientes, casos urgentes y caso más
 #       largo. Compruebe también si "San Jose" pertenece al set.
 
+print("Total de minutos:", acumulador_minutos)
+if len(incidencias) > 0:
+    print("Promedio de minutos:", acumulador_minutos / len(incidencias))
 
+print("Conteo por categoría:", categorias)
+print("Cantidad de casos pendientes:", contador_casos_pend)
+print("Provincias con pendientes:", provincias_pend)
+print("Casos urgentes:", casos_urgentes)
+print("Caso más largo:", caso_m_ate)
+print("¿San Jose pertenece al set de pendientes?:", "San Jose" in provincias_pend)
 
 
 
